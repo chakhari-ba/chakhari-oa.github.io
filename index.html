@@ -2067,8 +2067,8 @@ if (typeof module !== 'undefined') module.exports = DRAW;
         children: [new Paragraph({ alignment: o.right ? AlignmentType.RIGHT : AlignmentType.LEFT, children: [new TextRun({ text: String(t), font: F, size: o.size || 17, bold: o.bold, color: o.color })] })] });
       const tbl = (head, rows) => new Table({ width: { size: 100, type: WidthType.PERCENTAGE }, rows: [
         ...(head ? [new TableRow({ tableHeader: true, children: head.map(h => cell(h, { bold: true, fill: '14232E', color: 'FFFFFF' })) })] : []),
-        ...rows.map(r => new TableRow({ children: r })) ] });
-      const img = async str => { const p = await svgToPng(str, 2); const w = 620; return new Paragraph({ children: [new ImageRun({ data: p.buf, transformation: { width: w, height: Math.round(w * p.h / p.w) } })] }); };
+        ...rows.map(r => Array.isArray(r) ? new TableRow({ children: r }) : r) ] });
+      const img = async str => { const p = await svgToPng(str, 2); const w = 600; return new Paragraph({ children: [new ImageRun({ data: p.buf, transformation: { width: w, height: Math.round(w * p.h / p.w) } })] }); };
       const ch = [];
       ch.push(new Paragraph({ shading: { type: ShadingType.CLEAR, color: 'auto', fill: '14232E' }, spacing: { after: 0 }, children: [new TextRun({ text: 'CHAKHARI ', font: F, size: 64, bold: true, color: 'FFFFFF' }), new TextRun({ text: 'OA', font: F, size: 64, bold: true, color: 'D27A22' })] }));
       ch.push(new Paragraph({ shading: { type: ShadingType.CLEAR, color: 'auto', fill: '14232E' }, spacing: { after: 240 }, children: [new TextRun({ text: 'Conception des ponts courants selon les guides SETRA', font: F, size: 24, color: 'DCE4EA' })] }));
